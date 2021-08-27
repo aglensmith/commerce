@@ -50,6 +50,8 @@ async function login({
   let cookie = res.headers.get('Set-Cookie')
 
   if (cookie && typeof cookie === 'string') {
+    cookie = cookie + `; Domain=${process.env.BIGCOMMERCE_ROOT_DOMAIN}`
+
     // In development, don't set a secure cookie or the browser will ignore it
     if (process.env.NODE_ENV !== 'production') {
       cookie = cookie.replace('; Secure', '')
